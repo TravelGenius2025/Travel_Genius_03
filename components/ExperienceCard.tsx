@@ -1,3 +1,4 @@
+import { formatMoney } from '@/lib/currency'
 'use client'
 import Link from 'next/link'; import Co2Badge from './co2'; import RazorpayButton from './razorpay'
 export default function ExperienceCard({ item }:{ item:any }){
@@ -10,7 +11,7 @@ export default function ExperienceCard({ item }:{ item:any }){
     <div className="p-4 flex-1 flex flex-col gap-2">
       <h3 className="font-semibold">{title}</h3>
       <div className="text-sm text-[rgba(59,47,42,0.7)] line-clamp-2">{item.shortDescription||item.description||'Curated experience'}</div>
-      <div className="flex items-center justify-between mt-auto"><div className="font-bold">{currency} {price}</div><Co2Badge km={250}/></div>
+      <div className="flex items-center justify-between mt-auto"><div className="font-bold">{formatMoney(Number(price)||0)}</div><Co2Badge km={250}/></div>
       <div className="flex gap-2 pt-2">
         {item.viatorUrl&&<a className="button bg-gold-600 text-white" href={item.viatorUrl} target="_blank">Book</a>}
         {!item.viatorUrl&&<RazorpayButton title={title} amount={Math.max(499,Math.floor((Number(price)||999)*0.2))}/>}

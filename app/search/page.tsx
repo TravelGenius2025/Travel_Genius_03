@@ -1,3 +1,4 @@
+import { useI18n } from '@/lib/i18n'
 'use client'
 import SearchBar from '@/components/SearchBar'
 import ExperienceGrid from '@/components/ExperienceGrid'
@@ -8,11 +9,11 @@ import FlightSearch from '@/components/FlightSearch'
 import HotelSearch from '@/components/HotelSearch'
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-export default function SearchPage(){
+export default function SearchPage(){ const { t } = useI18n();
   const [cityId,setCityId]=useState<string|null>(null); const [cityName,setCityName]=useState<string>(''); const sp=useSearchParams()
   useEffect(()=>{ const id=sp.get('cityId'); const name=sp.get('cityName'); if(id) setCityId(id); if(name) setCityName(name) },[sp])
   return (<div className="space-y-6">
-    <h1 className="text-3xl font-bold h-serif">Search by city</h1>
+    <h1 className="text-3xl font-bold h-serif">{t('search_by_city')}</h1>
     <SearchBar onSelect={(id,name)=>{ setCityId(id); setCityName(name||'') }}/>
     <FlightSearch/>
     <HotelSearch/>

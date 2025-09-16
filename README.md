@@ -55,3 +55,34 @@ You can later switch to API-powered mode by adding keys in Vercel and removing t
 - Events via **Eventbrite / Meetup** deep links (no key)
 
 These services are free and require no credentials, suitable for light traffic MVPs. For scale/SLAs, upgrade to commercial APIs later.
+
+
+## v8 additions — global, multilingual, SEO-ready
+- **Multilingual UI** (EN/HI/ES) with auto-detect + header switcher.
+- **Currency auto-detect** with a switcher; prices shown in your currency (indicative FX).
+- **Pre-rendered SEO pages** for top cities at `/dest/<slug>` (Paris, Tokyo, New York, London, Dubai, Sydney, Singapore, Bangkok, Mumbai, Delhi).
+- **Sitemap** includes those city pages automatically.
+
+### Deploy (still zero-config)
+Same as before: upload to GitHub → Vercel → Deploy. Live immediately.
+
+### Add more cities
+Edit `app/dest/[slug]/page.tsx` → extend the `CITIES` array (slug, name, hero, blurb).
+
+
+## v9 additions — Arabic + RTL, IP currency auto, 50+ SEO cities
+- **Arabic UI** with proper **RTL** direction.
+- **IP-based currency auto-detect** (no keys; uses `/api/geoip` with ipwho.is).
+- **50+ pre-rendered city pages** for stronger SEO (`/dest/<slug>`).
+- **Sitemap** now includes all SEO cities.
+
+No configuration required. Upload to GitHub → Vercel → Deploy.
+
+
+## GitHub + Vercel quick buttons
+
+After you upload this folder to GitHub:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+
+If you prefer Netlify, this build also works there (Next.js 14).

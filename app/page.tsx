@@ -10,16 +10,17 @@ import HotelSearch from '@/components/HotelSearch'
 import IndiaHighlights from '@/components/IndiaHighlights'
 import { useState } from 'react'
 
+import { useI18n } from '@/lib/i18n'
 export default function Home(){
   const [city,setCity]=useState('Goa, India'); const [cityId,setCityId]=useState('1263706')
-  return (<div className="space-y-10">
+  const { t } = useI18n(); return (<div className="space-y-10">
     <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
       <div className="space-y-6">
-        <motion.h1 initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.6}} className="text-4xl md:text-5xl font-extrabold tracking-tight h-serif">Plan by <span className="text-gold-600">vibe</span>. Book with confidence.</motion.h1>
+        <motion.h1 initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:0.6}} className="text-4xl md:text-5xl font-extrabold tracking-tight h-serif">{t('micro_itineraries')} · {t('group_polls')}</motion.h1>
         <p className="text-[rgba(59,47,42,0.7)]">A fresh way to discover experiences and events. Start with a mood, not a checkbox.</p>
         <div className="flex gap-3">
-          <Link href="/search" className="button bg-gold-600 text-white">Start searching</Link>
-          <a href="#whats-good" className="button bg-[rgba(59,47,42,0.06)]">What’s good now</a>
+          <Link href="/search" className="button bg-gold-600 text-white">{t('cta_start_search')}</Link>
+          <a href="#whats-good" className="button bg-[rgba(59,47,42,0.06)]">{t('whats_good')}</a>
         </div>
         <VibeChips onChoose={()=>{}}/>
         <div className="flex gap-4 text-[rgba(59,47,42,0.7)]">
