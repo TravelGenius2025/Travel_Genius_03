@@ -1,0 +1,36 @@
+{
+  "Goa": [
+    {
+      "id": "evt_goa_1",
+      "name": "Beachside Live Music",
+      "date": "This weekend",
+      "venue": "Sundown Bay",
+      "url": "#"
+    },
+    {
+      "id": "evt_goa_2",
+      "name": "Food Truck Fiesta",
+      "date": "Next Friday",
+      "venue": "City Promenade",
+      "url": "#"
+    }
+  ],
+  "Jaipur": [
+    {
+      "id": "evt_jaipur_1",
+      "name": "Haat & Handicrafts",
+      "date": "Saturday",
+      "venue": "Bapu Bazaar",
+      "url": "#"
+    }
+  ],
+  "Udaipur": [
+    {
+      "id": "evt_udaipur_1",
+      "name": "Folk Dance Night",
+      "date": "Sunday",
+      "venue": "Bagore ki Haveli",
+      "url": "#"
+    }
+  ]
+}
