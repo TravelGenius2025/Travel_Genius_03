@@ -1,1 +1,1 @@
-{ "version": 2, "framework": "nextjs" }
+{ "version": 2, "framework": "nextjs" }, "functions": { "nodeVersion": "18.x" } }
