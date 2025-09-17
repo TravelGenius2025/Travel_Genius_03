@@ -1,0 +1,14 @@
+{
+  "1263706": [
+    {
+      "id": "exp1",
+      "title": "Sunset Cruise",
+      "image": "https://images.unsplash.com/photo-1503259901638-6c563b55a502?q=80&w=1200&auto=format&fit=crop",
+      "shortDescription": "Golden hour sail.",
+      "retailPrice": {
+        "amount": 1799,
+        "currency": "INR"
+      }
+    }
+  ]
+}
