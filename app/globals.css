@@ -2,11 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body{ @apply bg-ivory text-cocoa; }
-.button{ @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 font-semibold shadow-soft transition hover:opacity-90; }
-.card{ @apply rounded-2xl bg-white shadow-soft border border-[rgba(0,0,0,0.06)]; }
-.h-serif{ font-family:'Playfair Display', serif; }
+:root { --bg:#F9F7F3; --ink:#2E2A27; --p:#EC4899; --i:#6366F1; --v:#8B5CF6; }
+body { background: var(--bg); color: var(--ink); }
+.brand { background-image: linear-gradient(135deg, var(--p), var(--i), var(--v)); color: white; }
+.card { background: white; border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,.08); }
 
-/* RTL helpers */
-:root[dir='rtl'] body{ direction: rtl; }
-:root[dir='rtl'] nav{ direction: rtl; }
+:root[dir='rtl'] body { direction: rtl; }

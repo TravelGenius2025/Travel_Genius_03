@@ -1,23 +1,15 @@
 import { NextResponse } from 'next/server'
-
 export async function GET(req: Request){
   const { searchParams } = new URL(req.url)
   const city = (searchParams.get('city') || '').trim()
-  const lat = searchParams.get('lat')
-  const lon = searchParams.get('lon')
-  if(!city && (!lat || !lon)) return NextResponse.json({ data: null })
-  let latNum = Number(lat), lonNum = Number(lon)
+  if(!city) return NextResponse.json({ data: null })
   try{
-    if((!lat || !lon) && city){
-      const g = await fetch(`${new URL(req.url).origin}/api/geocode?city=${encodeURIComponent(city)}`, { cache: 'no-store' })
-      const gj = await g.json()
-      if(gj?.data){ latNum = gj.data.lat; lonNum = gj.data.lon }
-    }
-    if(!latNum || !lonNum) return NextResponse.json({ data: null })
-    const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latNum}&longitude=${lonNum}&daily=weathercode,temperature_2m_max,temperature_2m_min&current_weather=true&timezone=auto`, { cache: 'no-store' })
+    const g = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`, { cache: 'no-store', headers: { 'User-Agent':'TravelGenius/1.0 demo' } })
+    const gj = await g.json()
+    if(!Array.isArray(gj) || gj.length===0) return NextResponse.json({ data: null })
+    const { lat, lon } = gj[0]
+    const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min&current_weather=true&timezone=auto`, { cache: 'no-store' })
     const j = await r.json()
     return NextResponse.json({ data: j })
-  }catch(e){
-    return NextResponse.json({ data: null })
-  }
+  }catch{ return NextResponse.json({ data: null }) }
 }
