@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --bg: #F9F7F3; --text: #3B2F2A; }
+body { background: var(--bg); color: var(--text); }
+
+.h-serif { font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif; }
+.card { background: white; border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+.button { padding: .6rem 1rem; border-radius: .9rem; display:inline-flex; align-items:center; justify-content:center; }
+a.button { text-decoration:none; }
+nav a { text-decoration:none; }
+
+:root[dir='rtl'] body{ direction: rtl; }
+:root[dir='rtl'] nav{ direction: rtl; }
