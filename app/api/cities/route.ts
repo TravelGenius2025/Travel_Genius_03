@@ -7,16 +7,23 @@ export async function GET(req: Request){
   if(q.length < 2) return NextResponse.json({ data: [] })
 
   try {
-    const r = await fetch(`https://api.teleport.org/api/cities/?search=${encodeURIComponent(q)}&limit=10`, { cache: 'no-store' })
+    const url = `https://api.teleport.org/api/cities/?search=${encodeURIComponent(q)}&limit=10`
+    const r = await fetch(url, { cache: 'no-store' })
     const j = await r.json()
     const items = (j?._embedded?.['city:search-results'] || []).map((it:any)=> {
-      const name = it.matching_full_name || it?.matching_alternate_names?.[0]?.name || it?.matching_full_name || ''
-      return { id: it.href || it?.'_links'?.self?.href || name, city: name.split(',')[0], countryCode: name.split(',').pop()?.trim().split(' ').pop() || '' }
+      const name = it.matching_full_name || it?.matching_alternate_names?.[0]?.name || ''
+      const links = (it as any)?._links || {}
+      const selfHref = (links as any)?.self?.href
+      const cityItemHref = (links as any)?.['city:item']?.href
+      return {
+        id: (it as any).href || selfHref || cityItemHref || name,
+        city: (name.split(',')[0] || '').trim(),
+        countryCode: (name.split(',').pop() || '').trim().split(' ').pop() || ''
+      }
     })
     return NextResponse.json({ data: items })
-  } catch (e) {
-    // fall back to local
-    const data = (localCities as any[]).filter(c=> c.city.toLowerCase().includes(q.toLowerCase()))
+  } catch {
+    const data = (localCities as any[]).filter(c=> (c.city||'').toLowerCase().includes(q.toLowerCase()))
     return NextResponse.json({ data })
   }
 }
