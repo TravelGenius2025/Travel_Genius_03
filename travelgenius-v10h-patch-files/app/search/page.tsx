@@ -1,0 +1,23 @@
+'use client'
+import { useI18n } from '@/lib/i18n'
+import SearchBar from '@/components/SearchBar'
+import ExperienceGrid from '@/components/ExperienceGrid'
+import GlobalPOIGrid from '@/components/GlobalPOIGrid'
+import WeatherCard from '@/components/WeatherCard'
+import EventLinks from '@/components/EventLinks'
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+
+export default function SearchPage(){
+  const { t } = useI18n();
+  const [cityId,setCityId]=useState<string|null>(null); const [cityName,setCityName]=useState<string>(''); const sp=useSearchParams()
+  useEffect(()=>{ const id=sp.get('cityId'); const name=sp.get('cityName'); if(id) setCityId(id); if(name) setCityName(name||'') },[sp])
+  return (
+    <div className="space-y-6">
+      <h1 className="text-2xl font-bold h-serif">{t('search_by_city')}</h1>
+      <SearchBar onSelect={(id,name)=>{ setCityId(id); setCityName(name) }}/>
+      {cityName && (<div className="space-y-2"><h2 className="text-xl font-semibold">Explore {cityName}</h2><WeatherCard city={cityName}/><EventLinks city={cityName}/><GlobalPOIGrid city={cityName}/></div>)}
+      {cityId && !cityName && (<div className="space-y-2"><h2 className="text-xl font-semibold">Experiences</h2><ExperienceGrid cityId={cityId}/></div>)}
+    </div>
+  )
+}
