@@ -11,11 +11,9 @@ export async function GET(req: Request){
 
   const links = [
     { name:'Google Hotels', url:`https://www.google.com/travel/hotels?destination=${p(city)}&dates=${p(checkin)}%2C${p(checkout)}&adults=${adults}` },
-    { name:'Booking.com', url:`https://www.booking.com/searchresults.html?ss=${p(city)}&checkin=${p(checkin)}&checkout=${p(checkout)}&group_adults=${adults}` },
-    { name:'Agoda', url:`https://www.agoda.com/search?city=${p(city)}&checkIn=${p(checkin)}&checkOut=${p(checkout)}&adults=${adults}` },
-    { name:'Expedia', url:`https://www.expedia.com/Hotel-Search?destination=${p(city)}&startDate=${p(checkin)}&endDate=${p(checkout)}&adults=${adults}` },
-    { name:'Hotels.com', url:`https://www.hotels.com/Hotel-Search?destination=${p(city)}&startDate=${p(checkin)}&endDate=${p(checkout)}&adults=${adults}` },
-  ]
-
+    { name:'Booking.com', url:`https://www.booking.com/searchresults.html?ss=${p(city)}&checkin=${p(checkin)}&checkout=${p(checkout)}&group_adults=${adults}&aid=YOUR_AID` },
+    { name:'Agoda', url:`https://www.agoda.com/search?city=${p(city)}&checkIn=${p(checkin)}&checkOut=${p(checkout)}&adults=${adults)}&cid=YOUR_CID` },
+    { name:'Expedia', url:`https://www.expedia.com/search?city=${p(city)}&checkIn=${p(checkin)}&checkOut=${p(checkout)}&adults=${adults)}&cid=YOUR_CID` },
+    { name:'Hotels.com', url:`https://www.hotels.com/search?city=${p(city)}&checkIn=${p(checkin)}&checkOut=${p(checkout)}&adults=${adults)}&cid=YOUR_CID` },
   return NextResponse.json({ links })
 }
